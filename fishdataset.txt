@@ -1,0 +1,35 @@
+from sklearn.svm import SVC
+from sklearn.model_selection import train_test_split
+import pandas as pd
+
+df=pd.read_csv("C:/Users/CSE WPT/Downloads/archive(16)/Fish.csv")
+df
+
+df.describe()
+
+x=df.drop('Species',axis=1)
+y=df['Species']
+
+x
+
+y
+
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2)
+
+print(x.shape,x_train.shape,x_test.shape)
+
+model=SVC()
+
+model.fit(x_train,y_train)
+
+accuracy=model.score(x_train,y_train)
+print("Accuracy: ",accuracy)
+
+prediction=model.predict(x_test)
+prediction
+
+from sklearn.metrics import classification_report
+report=classification_report(y_test,prediction)
+
+print(report)
+
